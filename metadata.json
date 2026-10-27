@@ -1,0 +1,6 @@
+{
+  "name": "RemoteLink",
+  "description": "Privacy-first device companion for secure peer-to-peer file transfer and notification mirroring with instant consent control.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
