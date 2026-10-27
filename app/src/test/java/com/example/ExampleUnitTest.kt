@@ -44,4 +44,29 @@ class ExampleUnitTest {
         AppNotificationFilterManager.setAppPermitted("com.whatsapp", true)
         assertTrue(AppNotificationFilterManager.isAppPermitted("com.whatsapp"))
     }
+
+    @Test
+    fun testQrCodeParserWebSocketUrl() {
+        val result = com.example.util.QrCodeParser.parse("ws://192.168.1.55:8080/ws?role=device&code=9F3A1C7B")
+        assertEquals("192.168.1.55", result.host)
+        assertEquals(8080, result.port)
+        assertEquals("9F3A1C7B", result.code)
+        assertFalse(result.isSecure)
+    }
+
+    @Test
+    fun testQrCodeParserJson() {
+        val json = """{"host":"10.0.0.42","port":9000,"code":"TEST4321","secure":true}"""
+        val result = com.example.util.QrCodeParser.parse(json)
+        assertEquals("10.0.0.42", result.host)
+        assertEquals(9000, result.port)
+        assertEquals("TEST4321", result.code)
+        assertTrue(result.isSecure)
+    }
+
+    @Test
+    fun testQrCodeParserRawCode() {
+        val result = com.example.util.QrCodeParser.parse("9f3a1c7b")
+        assertEquals("9F3A1C7B", result.code)
+    }
 }

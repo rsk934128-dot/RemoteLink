@@ -105,14 +105,15 @@ jobs:
           path: release-apks/*
           retention-days: 30
 
-      - name: Create GitHub Release
-        if: ${{ startsWith(github.ref, 'refs/tags/') || github.event.inputs.create_github_release == 'true' }}
+      - name: Create or Update GitHub Release
+        if: ${{ success() }}
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name || 'v1.0.0' }}
-          name: ${{ github.event.inputs.release_title || github.ref_name || 'RemoteLink Android APK Release' }}
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || 'v1.0.0' }}
+          name: ${{ github.event.inputs.release_title || (startsWith(github.ref, 'refs/tags/') && github.ref_name) || 'RemoteLink Android APK (v1.0.0)' }}
           draft: false
           prerelease: false
+          make_latest: true
           files: release-apks/*
           body: |
             ## 📱 RemoteLink Android APK Release

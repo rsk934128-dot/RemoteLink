@@ -5,12 +5,13 @@
     <!-- Normal permissions for local/remote WebSocket and network awareness -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- Optional Camera for QR code pairing scan -->
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- Post notification for the persistent notification mirroring foreground notice -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
